@@ -29,3 +29,4 @@ for j in open('Vocab_ESLO.txt', 'r', encoding='utf-8'):
 with open('Decoded_ESLO_vocab.txt', 'w', encoding='utf-8') as newfile:
 	for ligne in propre:
 		newfile.write(ligne+'\n')
+os.remove('Vocab_ESLO.txt')
