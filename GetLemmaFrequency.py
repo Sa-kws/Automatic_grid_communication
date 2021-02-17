@@ -5,7 +5,7 @@ import spacy
 import glob
 import operator
 
-nlp = spacy.load('fr_core_news_sm')
+nlp = spacy.load('fr_core_news_lg')
 
 dossier = glob.glob('ESLO_modified//*')
 
@@ -19,7 +19,8 @@ for fichier in dossier:
                     lemme[token.lemma_] += 1
                 else:
                     lemme[token.lemma_] = 1
-lemme = sorted(lemme.items())
+lemme = sorted(lemme.items(), key=operator.itemgetter(1))
+lemme.reverse()
 
 with open('Vocab_ESLO.txt', 'w') as out:
     for tup in lemme:
