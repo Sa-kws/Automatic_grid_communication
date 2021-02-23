@@ -29,7 +29,7 @@ class GridElement:
     TYPE = str
     COLUMNS = Page.GRID_COL
     ROWS = Page.GRID_ROW
-    FOLDER = [x if x is dossier for x in open(liste_folder, 'r')]
+    #FOLDER = [x if x is dossier for x in open(liste_folder, 'r')]
 
     # Pour avoir la position d'un item il faut parcourir une liste et créer une position
     # Row_1xCol_1 ; Row_1xCol_2 ; ... et y ajouter un item
