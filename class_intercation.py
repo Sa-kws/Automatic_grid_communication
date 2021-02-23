@@ -37,9 +37,6 @@ class GridElement:
     def __init__(self):
         self.GridElement = self
 
-    def affiche():
-        print('This is working')
-
     def createPosition(self):
         self.itemize = self.GridElement
         grid_pos = []
