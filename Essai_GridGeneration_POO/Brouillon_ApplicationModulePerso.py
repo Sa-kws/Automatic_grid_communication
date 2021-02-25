@@ -30,3 +30,60 @@ for i in page_accueil:
 # Ouverture d'une page 
 if floder.click == True:
     open page
+
+'''
+#remplir les slots de words :
+#--------------------------
+
+positionner les mots sur les slots --> parcours de la liste de mots :
+for mots in liste_mots : mots sur slot dispo (besoin de parcourir le df aussi)
+'''
+#Essai 1 : 
+for i in slots_accueil:
+    try:
+        slots_accueil[i] = [x for x in words_page_accueil]
+    except ValueError:
+        print('Changement de colonne')
+print(slots_accueil)
+
+
+'''
+IL FAUT PRENDRE UN MOT ET LE POSER SUR UNE POSITION, PRENDRE UN MOT ET LE POSER, PRENDRE UN MOT ET LE POSER...
+'''
+
+'''
+compteur = 0
+used_words = []
+for i in page_accueil.iterrows():
+    # i est un tuple : i[0] = Row ; i[1] = ValeurS de la ligne
+    for j in i[1]:
+        #print('j', compteur, type(j), j)
+        for word in words_page_accueil:
+            unused_words = []
+            if word in used_words:
+                unused_words.append(word)
+
+            else:
+                compteur += 1
+                used_words.append(word)
+                try:
+                    # page_accueil[str(compteur)] = [x for x in word] #/ NOT WORKING
+                    for slot in page_accueil[str(compteur)]:
+                        for unu_word in unused_words:
+                           print(unu_word)
+                    page_accueil[str(compteur)].replace('SLOT', word, inplace=True)
+
+                except ValueError:
+                    print('Erreur passée - VALUE ERROR')
+                except KeyError:
+                    print('Erreur passée - KEY ERROR')
+
+'''
+'''
+                try:
+                    for sl in page_accueil[str(compteur)]:
+                        print(sl)
+
+                except KeyError:
+                    print('Erreur passée - KEY ERROR')
+'''
