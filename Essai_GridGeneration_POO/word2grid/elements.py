@@ -13,18 +13,15 @@ class Grid():
     def addFolderPage(self, page_source, page_target):
         # page_source = df contenant les slots item + le slot dossier
         # page_target = df contenant les slots du dossier qu'on voudrait ouvrir
-        comp = 0
         regex = r'[A-Z]{1}[0-9]{2}_F-[bc]'
         fin = False
         for i in page_source.columns:
             for val in range(0, len(page_source[i])):
-                comp += 1
                 if re.fullmatch(regex, page_source[i][val]):
                     new_page_folder = Page().addSlots(page_target, Page().makePage())
                     fin = True
+                    page_source[i][val] = page_source[i][val].lower().replace('_f-c','').replace('_f-b','')
                     break
-                else:
-                    pass
             if fin == True:
                 break
         return new_page_folder
@@ -34,8 +31,13 @@ class Grid():
         pass
 
     def export_to_csv(self, grid, name):
-        df = grid
-        pandas.df.to_csv(name, sep='\t')
+        name = 'page_'
+        num = 1
+        for page in grid:
+            name = name + str(num)
+            num += 1
+            df = page
+            pandas.df.to_csv(name, sep='\t')
 
 
 class Page():
@@ -58,14 +60,14 @@ class Page():
             #print('--- TO_USE : ', to_use)
             df[col] = [x for x in to_use]
             del slots[0:Slot.ROW_NUMBER]
-        # On passe en argument (slots) la liste de slots qu'on souhaite ajouter à la page, ensuite,
-        # on initialise une liste (to_use) dans laquelle on ajoute le nombre de slots par colonne selon le nombre
-        # de ligne (Slot.ROW_NUMBER). Ensuite, on parcours to_use pour remplir la colonne du DataFrame.
-        # Une fois la colonne remplie, on supp les slots déjà ajoutés de la liste de slots originale pour ne pas
-        # les reprendre dans to_use.
-        #
-        # ?? (On pourrait copier la liste dans la fonction afin de ne pas toucher l'originale)
+        Grid.PAGES.append(df)
         return df
+    # On passe en argument (slots) la liste de slots qu'on souhaite ajouter à la page, ensuite,
+    # on initialise une liste (to_use) dans laquelle on ajoute le nombre de slots par colonne selon le nombre
+    # de ligne (Slot.ROW_NUMBER). Ensuite, on parcours to_use pour remplir la colonne du DataFrame.
+    # Une fois la colonne remplie, on supp les slots déjà ajoutés de la liste de slots originale pour ne pas
+    # les reprendre dans to_use.
+    # ?? (On pourrait copier la liste dans la fonction afin de ne pas toucher l'originale)
 
 
 class Slot():
