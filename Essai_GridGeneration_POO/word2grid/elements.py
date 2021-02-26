@@ -16,7 +16,6 @@ class Grid():
         comp = 0
         regex = r'[A-Z]{1}[0-9]{2}_F-[bc]'
         fin = False
-
         for i in page_source.columns:
             for val in range(0, len(page_source[i])):
                 comp += 1
@@ -59,8 +58,6 @@ class Page():
             #print('--- TO_USE : ', to_use)
             df[col] = [x for x in to_use]
             del slots[0:Slot.ROW_NUMBER]
-
-            #print('--- SLOTS -'+str(Slot.ROW_NUMBER)+ ': ',slots, len(slots))
         # On passe en argument (slots) la liste de slots qu'on souhaite ajouter à la page, ensuite,
         # on initialise une liste (to_use) dans laquelle on ajoute le nombre de slots par colonne selon le nombre
         # de ligne (Slot.ROW_NUMBER). Ensuite, on parcours to_use pour remplir la colonne du DataFrame.
@@ -68,8 +65,6 @@ class Page():
         # les reprendre dans to_use.
         #
         # ?? (On pourrait copier la liste dans la fonction afin de ne pas toucher l'originale)
-
-        #print(df)
         return df
 
 
