@@ -1,4 +1,5 @@
 import pandas
+import re
 
 class Grid():
     PAGES = []
@@ -8,8 +9,29 @@ class Grid():
         self.Grid = Grid
         self.LISTE_CORE = ['je', 'vouloir', 'aimer', 'quoi']
 
+    # Ajout d'une page ouverte via un dossier
+    def addFolderPage(self, page_source, page_target):
+        # page_source = df contenant les slots item + le slot dossier
+        # page_target = df contenant les slots du dossier qu'on voudrait ouvrir
+        comp = 0
+        regex = r'[A-Z]{1}[0-9]{2}_F-[bc]'
+        fin = False
+
+        for i in page_source.columns:
+            for val in range(0, len(page_source[i])):
+                comp += 1
+                if re.fullmatch(regex, page_source[i][val]):
+                    new_page_folder = Page().addSlots(page_target, Page().makePage())
+                    fin = True
+                    break
+                else:
+                    pass
+            if fin == True:
+                break
+        return new_page_folder
+
     # Ajout d'un ensemble de pages qui seront passées en arguments
-    def addPage():
+    def addPages(self):
         pass
 
     def export_to_csv(self, grid, name):
@@ -33,12 +55,12 @@ class Page():
         df = page
         for col in df:
             to_use = []
-            print('--- SLOTS (av) : ', slots, len(slots))
-            to_use = [slots[i] for i in range(0,Slot.ROW_NUMBER)]
-            print('--- TO_USE : ', to_use)
+            to_use = [slots[i] for i in range(0, Slot.ROW_NUMBER)]
+            #print('--- TO_USE : ', to_use)
             df[col] = [x for x in to_use]
             del slots[0:Slot.ROW_NUMBER]
-            print('--- SLOTS -'+str(Slot.ROW_NUMBER)+ ': ',slots, len(slots))
+
+            #print('--- SLOTS -'+str(Slot.ROW_NUMBER)+ ': ',slots, len(slots))
         # On passe en argument (slots) la liste de slots qu'on souhaite ajouter à la page, ensuite,
         # on initialise une liste (to_use) dans laquelle on ajoute le nombre de slots par colonne selon le nombre
         # de ligne (Slot.ROW_NUMBER). Ensuite, on parcours to_use pour remplir la colonne du DataFrame.
@@ -47,7 +69,7 @@ class Page():
         #
         # ?? (On pourrait copier la liste dans la fonction afin de ne pas toucher l'originale)
 
-
+        #print(df)
         return df
 
 
@@ -95,7 +117,7 @@ class Slot():
 
 class Item():
     WORD = ''
-    PAGE_DESTINATION = Grid.addPage()
+    #PAGE_DESTINATION = Grid.addPage()
     def __init__(self, word):
         self.Item = Item
         self.WORD = word
