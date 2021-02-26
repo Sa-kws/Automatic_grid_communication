@@ -48,6 +48,38 @@ print(slots_accueil)
 
 
 '''
+# ---------- Code à taper dans main() : ----------
+# Initialisation d'une Page :
+page_accueil = el.Page()
+page_accueil = page_accueil.addPage()
+# Transformation des valeurs de la Page en Slots :
+slots_accueil = el.Slot()
+slots_accueil = slots_accueil.addSlots(page_accueil)
+# Ouverture d'une page via un click sur Dossier :
+page_lieu = el.Item()
+page_lieu = page_lieu.clickItem(page_lieu, pages[1])
+
+# ---------- Brouillon : ----------
+
+item = el.Item()
+
+
+
+
+            # Maintenant : df[slot] = le mot
+            # ajout du mot dans une liste (liste_mots_usés)
+            # ajout d'une condition : si le mot est dans la liste mits usés, alors on pass, sinon, df[slot] = le mot suivant
+
+
+#print(page_accueil)
+#print('\n')
+#print(page_lieu)
+
+
+    #put word in slot please :)
+'''
+
+'''
 IL FAUT PRENDRE UN MOT ET LE POSER SUR UNE POSITION, PRENDRE UN MOT ET LE POSER, PRENDRE UN MOT ET LE POSER...
 '''
 
