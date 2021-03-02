@@ -4,10 +4,13 @@ import re
 class Grid():
     PAGES = []
     SLOTS = []
-    LISTE_CORE = ['je', 'vouloir', 'aimer', 'quoi']
+    ROW_SIZE = 3
+    COL_SIZE = 6
+    LISTE_CORE = [['je', 0, 2], ['vouloir', 0, 1], ['aimer', 1, 1], ['quoi', 1, 2]]
+
     def __init__(self):
         self.Grid = Grid
-        self.LISTE_CORE = ['je', 'vouloir', 'aimer', 'quoi']
+
 
     # Ajout d'une page ouverte via un dossier
     def addFolderPage(self, page_source, page_target):
@@ -30,14 +33,21 @@ class Grid():
     def addPages(self):
         pass
 
-    def export_to_csv(self, grid, name):
-        name = 'page_'
+    # A revoir
+    def export_to_csv(self):
+        #os.mkdir("Classeurs")
         num = 1
-        for page in grid:
+        for page in self.PAGES:
+            name = 'page_'
             name = name + str(num)
             num += 1
             df = page
-            pandas.df.to_csv(name, sep='\t')
+            writer = pandas.ExcelWriter(path='Grid_sheets.xlsx',engine=None)
+            df.to_excel('Grid_sheets.xlsx', sheet_name=name)
+            '''DataFrame.to_excel(excel_writer, sheet_name='Sheet1', na_rep='', float_format=None, columns=None,
+                               header=True, index=True, index_label=None, startrow=0, startcol=0, engine=None,
+                               merge_cells=True, encoding=None, inf_rep='inf', verbose=True, freeze_panes=None,
+                               storage_options=None)'''
 
 
 class Page():
@@ -45,21 +55,88 @@ class Page():
 
     def __init__(self):
         self.Page = Page
+        print('\t📜 La page est créée. 📜')
 
+    # Retourne une page (pandas.df) intégrant le vocabulaire core.
+    # Pour le moment, le vocab est figé et limité, à réfléchir
     def makePage(self):
-        return pandas.DataFrame(columns=[str(x + 1) for x in range(0, Slot.COL_NUMBER)], index=range(Slot.ROW_NUMBER)).astype(str)
+        df = pandas.DataFrame(columns=[str(x + 1) for x in range(0, Grid.COL_SIZE)], index=range(Grid.ROW_SIZE)).astype(str)
+        row = 0
+        core = []
+        for cr in Grid.LISTE_CORE:
+            core.append(cr[0])
+        for i in df.iterrows():
+            row += 1
+            col = 0
+            for val in range(0, len(i[1])):
+                col += 1
+                if col < 3 and row < 2:
+                    try:
+                        df[str(col)][0, 1] = core[0], core[1]
+                        del core[0:2]
+                    except IndexError:
+                        return False
+        return df
+
+    def switch(self, liste_core, liste_vocab):
+        to_switch = []
+        index_core = 0
+        for core_vocab in liste_core:
+            row_core = core_vocab[1]
+            col_core = core_vocab[2]
+            index_voc = 0
+            for normal_vocab in liste_vocab:
+                row_normal = normal_vocab[0]
+                col_normal = normal_vocab[1]
+                if row_core == row_normal and col_core == col_normal:
+                    to_switch.append(normal_vocab[2])
+                    liste_vocab[index_voc][2] = liste_core[index_core][0]
+                index_voc += 1
+            index_core += 1
+        for swtch in to_switch:
+            for corvoc in liste_core:
+                if corvoc[0] == swtch:
+                    pass
+        x = 0
+        
+        # ➰➰➰➰---------Reprendre ICI-----------❌❌
+        core_vocabulary = []
+        for r in liste_core:
+            core_vocabulary.append(r[0])
+        
+
+        for word in liste_vocab:
+            if word[2] in core_vocabulary:
+                print(word)
+                '''if to_switch[0] not in core_vocabulary:
+                    liste_vocab[x][2] = liste_vocab[x][2].replace(liste_vocab[x][2], '🟠🟠')
+                del to_switch[0]'''
+            x += 1
+        print(liste_vocab)
+        # ➰➰➰➰--------------------❌❌
+
 
     def addSlots(self, slots, page):
         # Il faut passer en argument une liste de Slot, on les mettra ensuite dans un tableau
         # Possiblement : DataFrame - pandas
         # Il faut aussi passer une une page, qui correspond à un df qu'on aura créé avec la méthode makePage()
         df = page
+        core = []
+        for x in Grid.LISTE_CORE:
+            core.append(x[0])
         for col in df:
+            #for val in df[col]:
+               # if val != 'nan' and val not in Grid.LISTE_CORE:
+            #to_use = [slots[i][2] if slots[i][2] not in core else core[core.index(slots[i][2])] for i in range(0, Grid.ROW_SIZE)]
             to_use = []
-            to_use = [slots[i] for i in range(0, Slot.ROW_NUMBER)]
-            #print('--- TO_USE : ', to_use)
+            for i in range(0, Grid.ROW_SIZE):
+                if slots[i][2] not in core:
+                    to_use.append(slots[i][2])
+                else:
+                    to_use.append(core[core.index(slots[i][2])])
+                    del core[core.index(slots[i][2])]
             df[col] = [x for x in to_use]
-            del slots[0:Slot.ROW_NUMBER]
+            del slots[0:Grid.ROW_SIZE]
         Grid.PAGES.append(df)
         return df
     # On passe en argument (slots) la liste de slots qu'on souhaite ajouter à la page, ensuite,
@@ -71,16 +148,15 @@ class Page():
 
 
 class Slot():
-    ROW_NUMBER = 3
-    COL_NUMBER = 6
-    ITEM_IS_CORE = False
-    def __init__(self, row_num, col_num):
-        # ceci implique que le numéro de la ligne et de la colonne doit être passé en argument lorsque l'on créé la clase
+    LISTE_SLOTS = []
+    def __init__(self):#, row_num, col_num):
+        # ceci implique que le numéro de la ligne et de la colonne doit être passé en argument lorsque
+        # l'on créé la clase
         # Type : int
         # Exemple : slot = Slot(3,2)
         self.Slot = Slot
-        self.ROW_NUMBER = row_num
-        self.COL_NUMBER = col_num
+        #self.ROW_NUMBER = row_num
+        #self.COL_NUMBER = col_num
 
     @property
     # Manque le mot positionné, chercher comment l'ajouter
@@ -88,18 +164,45 @@ class Slot():
     # Puis essai avec item.WORD en argument également, fonctionne, mais en fonction, non en propriété
     def position(self):
         position = []
-        position.append(self.ROW_NUMBER)
-        position.append(self.COL_NUMBER)
+        position.append(Grid.ROW_SIZE)
+        position.append(Grid.COL_SIZE)
         #position.append(item.WORD)
         return position # Retourne une liste
 
     # Il faut passer l'item qu'on veut ajouter au slot en argument
-    def addItem(self, position, item):
+    def addItem(self, item_list):
         # position est une liste de position, pas nécessairement issue de la propriété de la classe
         # Exemple : [4,8] avec 4 = Rows ; 8 = Columns
-        filled_slot = position
-        filled_slot.append(item)
-        return filled_slot # Retourne une liste avec [row, column, word]
+        # item must be list
+        position = []
+        if len(item_list) == Grid.ROW_SIZE * Grid.COL_SIZE:
+            pos = 0
+            row = 0
+            while row < Grid.ROW_SIZE:
+                col = 0
+                while col < Grid.COL_SIZE:
+                    inter = []
+                    col += 1
+                    inter.append(row)
+                    inter.append(col)
+                    inter.append(item_list[pos])
+                    self.LISTE_SLOTS.append(inter)
+                    pos += 1
+                row += 1
+
+            print('\tL\'item est associé au slot, et ajouté à la liste de slots.')
+            return self.LISTE_SLOTS  # Retourne une liste de position comprenant une liste avec [row, column, word]
+        else:
+            return '❌❌--- Il n\'y a pas le même nombre d\'items et de slots. ---❌❌\n\t--> Aucun item n\'a été ajouté à la liste.'
+
+
+
+    @property
+    def slots(self):
+        slts = []
+        for slt in Slot.LISTE_SLOTS:
+           slts.append(slt)
+        return slts
 
 
 
@@ -120,15 +223,20 @@ class Item():
         self.WORD = word
         # ceci implique que le word doit être passé en argument lorsque l'on créé la clase
         # Exemple : item = Item('mot d'exemple')
+        print('L\'item', word, 'est créé.')
 
     def makeItem(self):
         item = self.WORD
-        #print('item is : \'' + item + '\'')
         return item # Return str
 
+
     @property
+    # ⚠ S'applique sur l'item directement, PAS sur le retour str de la ❌ méthode Item().makeItem() ❌
     def isCore(self):
-        if self.WORD in Grid.LISTE_CORE:
-            return True
-        else:
-            return False
+        for el in range(0,len(Grid.LISTE_CORE)):
+            #print(Grid.LISTE_CORE[el][0])
+            if self.WORD == Grid.LISTE_CORE[el][0]:
+                #print(self.WORD, 'work')
+                return True
+            else:
+                pass
