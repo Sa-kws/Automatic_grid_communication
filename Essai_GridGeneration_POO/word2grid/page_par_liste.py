@@ -21,8 +21,8 @@ class Slot():
         return slot
 
 class Page():
-    ROW_SIZE = 2
-    COL_SIZE = 4
+    ROW_SIZE = 100
+    COL_SIZE = 1
     def __init__(self):
         self.Page = Page
 
@@ -56,23 +56,15 @@ class Page():
             #last_unfilled.append(col)
             return False
 
-    # ❌❌❌  ⬇⬇ NOT WORKING
+
     def isFull(self, page):
         previous = True
         for row in range(0,len(page)):
-            print('row')
             for col in range (0, len(page[row])):
-                print('col')
-                while previous == True:
-                    print('Boucle While ')
-                    if page[row][col][0] == None:
-                        previous = False
-                        return False
+                if page[row][col][0] == None:
+                    previous = False
+                    return False
         return True
-    # ❌❌❌  ⬆⬆ NOT WORKING
-
-
-
 
 
 class Grid():
@@ -83,4 +75,5 @@ class Grid():
         self.Grid = Grid
 
     def addPage(self, page):
-        self.Grid.PAGES.append(page)
+        Grid.PAGES.append(page)
+        return Grid.PAGES
