@@ -21,17 +21,16 @@ class Slot():
         return slot
 
 class Page():
-    ROW_SIZE = 100
-    COL_SIZE = 1
+    ROW_SIZE = 10
+    COL_SIZE = 10
     def __init__(self):
         self.Page = Page
 
-    # ➰➰---- def __new()__:
-    def makePage(self):
+    def __new__(cls):
         tableau = []
-        for i in range(0, self.ROW_SIZE):
+        for i in range(0, cls.ROW_SIZE):
             entre = []
-            for j in range(0, self.COL_SIZE):
+            for j in range(0, cls.COL_SIZE):
                 entre.append([None])
             tableau.append(entre)
 
