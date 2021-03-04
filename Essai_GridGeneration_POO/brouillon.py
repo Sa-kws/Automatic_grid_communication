@@ -1,12 +1,13 @@
 from word2grid import page_par_liste as nel
 
 
-phrase = 'je suis stagiaire et quoi je ai un stylo et puis je suis aussi un peu pourquoi pas et puis voilà quoi aussi Grenoble c\' loin de Dreux vraiment'
+phrase = 'je suis stagiaire et quoi je ai un stylo et puis je suis aussi un peu pourquoi pas et puis voilà quoi aussi Grenoble c\' loin de Dreux mince'
+phrase = ''
 phrase = phrase.split(' ')
 
 
 grid = nel.Grid().PAGES
-page = nel.Page().makePage()
+page = nel.Page()
 
 
 row_to_fill = 0
@@ -37,6 +38,7 @@ for word in phrase:
                 # save page
                 grid.append(page)
                 # initialiser une nouvelle page
-                page = nel.Page().makePage()
+                page = nel.Page()
         if grid == []:
             grid.append(page)
+print(grid)
