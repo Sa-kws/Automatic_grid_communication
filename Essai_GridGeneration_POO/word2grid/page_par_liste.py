@@ -117,3 +117,13 @@ class Grid():
                     break
             break
         return grid
+
+
+Class Preprocess:
+    
+    def addCoreWords(self, in_datas, used_words):
+        stockage_intermediaire = []
+        for word in in_datas:
+            if Item(word).isCore == True and word not in used_words:
+                used_words.append(word)
+        return used_words
