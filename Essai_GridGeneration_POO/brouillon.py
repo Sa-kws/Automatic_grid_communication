@@ -8,6 +8,7 @@ phrase = phrase.split(' ')
 grid = nel.Grid().PAGES
 page = nel.Page()
 used = []
+used = nel.Preprocess.addCoreWords(nel.Preprocess, phrase, used)
 
 for word in phrase:
     if nel.Page.isWellSized(nel.Page, page) == False:
