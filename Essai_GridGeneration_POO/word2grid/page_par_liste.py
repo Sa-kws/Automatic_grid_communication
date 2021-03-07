@@ -13,7 +13,12 @@ class Item():
         slot.append(self)
         slot.append(is_core)
         return slot
-
+    @property
+    def openFolder(self, path_to_folder):
+        if path_to_folder != None:
+            return path_to_folder
+        else:
+            return None
 '''
 class Slot():
     def __init__(self):
@@ -93,7 +98,7 @@ class Grid():
             # Parcours de la page, et recherche des position vide via la méthode Page().isOccupied() (True ou False) dans la page créée
             for row_browse in range(0, len(page)):
                 for col_browse in range(0, len(page[row_browse])):
-                    if Page.isOccupied(Page(), row_browse, col_browse, page) == False and word not in used_words:
+                    if Page.isOccupied(Page, row_browse, col_browse, page) == False and word not in used_words:
                         page = Page.addSlot(Page, page, row_browse, col_browse, item.word)
                         used_words.append(item.word)
         return grid
@@ -111,7 +116,7 @@ class Grid():
         page = Page()
         for row in range(0, len(page)):
             for col in range(0, len(page[row])):
-                if Page.isOccupied(Page(), row, col, page) == False and word not in used_words:
+                if Page.isOccupied(Page, row, col, page) == False and word not in used_words:
                     page = Page.addSlot(Page, page, row, col, item.word)
                     used_words.append(word)
                     break
@@ -119,7 +124,7 @@ class Grid():
         return grid
 
 
-Class Preprocess:
+class Preprocess:
     
     def addCoreWords(self, in_datas, used_words):
         stockage_intermediaire = []
@@ -127,3 +132,4 @@ Class Preprocess:
             if Item(word).isCore == True and word not in used_words:
                 used_words.append(word)
         return used_words
+
