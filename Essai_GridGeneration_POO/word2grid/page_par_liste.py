@@ -1,40 +1,35 @@
-class Item():
+class Slot():
 
-    def __init__(self, word):
+    def __init__(self, word, isCore):
+        # word = str que l'on souhaite traiter et placer sur la grille
+        # is Core = Booléen un indiquant si le mot traité fait parti du vocabulaire core ou non
         self.word = word
-
-    @property
-    def isCore(self):
-        return self.word in Grid.CORE_VOCABULARY
-
+        self.isCore = isCore
 
     def addItem(self, is_core):
         slot = []
         slot.append(self)
         slot.append(is_core)
         return slot
+
     @property
     def openFolder(self, path_to_folder):
         if path_to_folder != None:
             return path_to_folder
         else:
             return None
-'''
-class Slot():
-    def __init__(self):
-        self.Slot = self
-'''
 
 class Page():
     ROW_SIZE = 3
-    COL_SIZE = 5
+    COL_SIZE = 4
     WARNING_MESSAGE = 'PAGE NON GENEREE :\nErreur d\'index - La position du vocabulaire core n\'existe pas dans la grille.\nChangez la taille de la grille, ou la position du vocabulaire core.'
-
     def __init__(self):
         self.Page = Page
 
-    def __new__(cls):
+    def __new__(cls, ID, name):
         tableau = []
+        cls.ID = ID
+        #tableau.append([ID, name])
         for i in range(0, cls.ROW_SIZE):
             entre = []
             for j in range(0, cls.COL_SIZE):
@@ -83,53 +78,96 @@ class Page():
 class Grid():
     PAGES = []
     CORE_VOCABULARY = ['je', 'vouloir', 'quoi', 'pourquoi']
-    LISTE_CORE = [['je', 0, 1], ['vouloir', 0, 0], ['quoi', 1, 1], ['pourquoi', 0, 3]]
+    LISTE_CORE = [['je', 0, 1], ['vouloir', 0, 0], ['quoi', 1, 1], ['pourquoi', 1, 0]]
     def __init__(self):
         self.Grid = Grid
 
-    def addPage(self, grid, page):
-        grid.append(page)
-        return grid
 
-    def makeGrid(self, item, word, used_words, page, grid):
+    def addPage(self, core, word, used_words, page, grid):
         # Si le word est un voc core, on s'arrête là, puisqu'il sera déjà placé sur la page
-        if item.isCore == False and word not in used_words:
+        if core == False and word not in used_words:
             # Vérification qu'il reste de la place sur la page
             # Parcours de la page, et recherche des position vide via la méthode Page().isOccupied() (True ou False) dans la page créée
             for row_browse in range(0, len(page)):
                 for col_browse in range(0, len(page[row_browse])):
                     if Page.isOccupied(Page, row_browse, col_browse, page) == False and word not in used_words:
-                        page = Page.addSlot(Page, page, row_browse, col_browse, item.word)
-                        used_words.append(item.word)
+                        page = Page.addSlot(Page, page, row_browse, col_browse, word)
+                        used_words.append(word)
         return grid
 
-    def finishGrid(self, page, grid):
+    def finishGrid(*self, page, grid):
         if page not in grid:
-            grid = Grid.addPage(Grid, grid, page)
+            grid.append(page)
         return grid
 
-    def showGrid(self, grid):
-        return grid
-
-    def addUnfulledPage(*self, grid, page, used_words, word, item):
-        grid = Grid.addPage(Grid, grid, page)
-        page = Page()
+    def addFulledPage(*self, ID, grid, page, used_words, word):
+        grid.append(page)
+        page = Page(ID, 'test-')
         for row in range(0, len(page)):
             for col in range(0, len(page[row])):
                 if Page.isOccupied(Page, row, col, page) == False and word not in used_words:
-                    page = Page.addSlot(Page, page, row, col, item.word)
+                    page = Page.addSlot(Page, page, row, col, word)
                     used_words.append(word)
                     break
             break
         return grid
 
+    def addFolderPage(*self, path, folder_datas, grid, ID):
+        used_words = []
+        # On commence par vérifier que le mot n'ouvre pas un dossier, si c'est le cas, on créé la page.
+        if path != None:
+            ID += 1
+            name = 'Page_' + str(ID)
+            folder_page = Page(ID, name)
+            for word in folder_datas:
+                grid, page = Grid.makeGrid(page=folder_page, used_words=used_words, grid=grid, ID=ID, word=word, iscore=False)
+
+
+            grid = Grid.finishGrid(page=folder_page, grid=grid)
+        return grid
+
+    def makeGrid(*self, page, used_words, grid, ID, iscore, word):
+            if Page.isFull(Page, page) == False:
+                grid = Grid.addPage(Grid, iscore, word, used_words, page, grid)
+            else:
+                grid = Grid.addFulledPage(ID=ID, grid= grid, page=page, used_words=used_words, word=word)
+                ID += 1
+                name = 'Page_' + str(ID)
+                page = Page(ID, name)
+
+            return grid, page
 
 class Preprocess:
     
     def addCoreWords(self, in_datas, used_words):
         stockage_intermediaire = []
         for word in in_datas:
-            if Item(word).isCore == True and word not in used_words:
+            if Slot(word).isCore == True and word not in used_words:
                 used_words.append(word)
         return used_words
 
+def main(in_datas):
+    ID = 0
+    name = 'Page_' + str(ID)
+    page = Page(ID, name)
+
+    used_words = []
+    grid = Grid().PAGES
+
+    if Page.isWellSized(Page, page) == False:
+        print(Page.WARNING_MESSAGE)
+        print('Le programme va s\'arrêter.')
+    else:
+        for ligne in in_datas:
+            word = ligne[0]
+            iscore = ligne[1]
+            path = ligne[2]
+            # folder_datas = open(word + '.txt', 'r', encoding='utf-8')
+            folder_datas = [word]
+            grid = Grid.addFolderPage(path=path, folder_datas=folder_datas, grid=grid, ID=ID)
+            grid, page = Grid.makeGrid(page=page, used_words=used_words, grid=grid, ID=ID, word=word, iscore=iscore)
+        grid = Grid.finishGrid(page=page, grid=grid)
+    return grid
+
+#def if __name__ == '__main__':
+#    main()
