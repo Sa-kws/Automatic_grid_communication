@@ -7,6 +7,29 @@ class Grid():
     def __init__(self):
         self.Grid = Grid
 
+    def setCoreVoc(*self):
+    # Cette méthode va servir à modifier le vocabulaire core si celui-ci ne convient pas à l'utilisateur.
+        print(Grid.LISTE_CORE, '\n')
+
+        if input("La liste de Vocabulaire Core convient-elle ? ['y' or 'n']") != 'y':
+            import re
+            regex = r'[0-9]*'
+            # On présente la liste à l'utilisateur et on lui demande si celle-ci lui convient,
+            # si ce n'est pas le cas, on lui demande d'entrer sa propre liste selon un format spécifique
+            new_voc = input('Entrez votre liste de vocabulaire au format suivant :\n\n\tmot;position de ligne;position de colonne_mot;position de ligne;position de colonne_ ...\n')
+            newvoc = new_voc.split('_')
+            for liste in range(0, len(newvoc)):
+                newvoc[liste] = newvoc[liste].split(';')
+            # Ensuite, on met en forme l'entrée pour que celle-ci soit conforme à notre programme
+            for core in range(0, len(newvoc)):
+                for element in range(0, len(newvoc[core])):
+                    if re.fullmatch(regex, newvoc[core][element]):
+                        newvoc[core][element] = int(newvoc[core][element])
+
+            Grid.LISTE_CORE = newvoc
+        return Grid.LISTE_CORE
+        # Sortie : La liste du vocabulaire Core modifiée ou non, selon le choix de l'utilisateur / Type : list
+
 
     def addPage(self, core, word, used_words, page, grid):
         # Si le word est un voc core, on s'arrête là, puisqu'il sera déjà placé sur la page

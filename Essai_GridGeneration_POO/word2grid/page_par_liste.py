@@ -20,8 +20,8 @@ class Slot():
             return None
 
 class Page():
-    ROW_SIZE = 3
-    COL_SIZE = 4
+    ROW_SIZE = int(input('Combien de lignes souhaitez-vous pour chaque page ?'))
+    COL_SIZE = int(input('Combien de colonnes souhaitez-vous pour chaque page ?'))
     WARNING_MESSAGE = 'PAGE NON GENEREE :\nErreur d\'index - La position du vocabulaire core n\'existe pas dans la grille.\nChangez la taille de la grille, ou la position du vocabulaire core.'
     def __init__(self):
         self.Page = Page
@@ -79,8 +79,28 @@ class Grid():
     PAGES = []
     CORE_VOCABULARY = ['je', 'vouloir', 'quoi', 'pourquoi']
     LISTE_CORE = [['je', 0, 1], ['vouloir', 0, 0], ['quoi', 1, 1], ['pourquoi', 1, 0]]
+
     def __init__(self):
         self.Grid = Grid
+
+    def setCoreVoc(*self):
+        print(Grid.LISTE_CORE, '\n')
+        if input("La liste de Vocabulaire Core convient-elle ? ['y' or 'n']") != 'y':
+            import re
+            regex = r'[0-9]*'
+
+            new_voc = input('Entrez votre liste de vocabulaire au format suivant :\n\n\tmot;position de ligne;position de colonne_mot;position de ligne;position de colonne_ ...\n')
+            newvoc = new_voc.split('_')
+            for liste in range(0, len(newvoc)):
+                newvoc[liste] = newvoc[liste].split(';')
+
+            for core in range(0, len(newvoc)):
+                for element in range(0, len(newvoc[core])):
+                    if re.fullmatch(regex, newvoc[core][element]):
+                        newvoc[core][element] = int(newvoc[core][element])
+
+            Grid.LISTE_CORE = newvoc
+            return Grid.LISTE_CORE
 
 
     def addPage(self, core, word, used_words, page, grid):
@@ -119,6 +139,7 @@ class Grid():
             ID += 1
             name = 'Page_' + str(ID)
             folder_page = Page(ID, name)
+            #folder_datas = ['a remplir' for x in range(0, Page.COL_SIZE*Page.ROW_SIZE)]
             for word in folder_datas:
                 grid, page = Grid.makeGrid(page=folder_page, used_words=used_words, grid=grid, ID=ID, word=word, iscore=False)
 
@@ -147,12 +168,17 @@ class Preprocess:
         return used_words
 
 def main(in_datas):
+    import re
     ID = 0
     name = 'Page_' + str(ID)
     page = Page(ID, name)
 
     used_words = []
     grid = Grid().PAGES
+
+    Grid.LISTE_CORE = Grid.setCoreVoc()
+
+
 
     if Page.isWellSized(Page, page) == False:
         print(Page.WARNING_MESSAGE)
