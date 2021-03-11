@@ -7,12 +7,10 @@ class Page():
     WARNING_MESSAGE = 'PAGE NON GENEREE :\nErreur d\'index - La position du vocabulaire core n\'existe pas dans la grille.\nChangez la taille de la grille, ou la position du vocabulaire core.'
     
     def __init__(self):
-        self.Page = Page
+        self.tableau = []
 
 
     def createPage(self):
-      
-        self.tableau = []
         
         # Initialisation d'une grille à la taille des valeurs indiquées dans les attributs ROW_SIZE et COL_SIZE
         # Sortie : Tableau vide en ROW_SIZE*COL_SIZE
