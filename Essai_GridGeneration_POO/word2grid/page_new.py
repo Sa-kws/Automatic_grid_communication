@@ -2,9 +2,9 @@ from word2grid import Grid
 
 class Page():
     #SLOTS = []
-    ROW_SIZE = 3
-    COL_SIZE = 4
-    WARNING_MESSAGE = 'PAGE NON GENEREE :\nErreur d\'index - La position du vocabulaire core n\'existe pas dans la grille.\nChangez la taille de la grille, ou la position du vocabulaire core.'
+    __ROW_SIZE = 3
+    __COL_SIZE = 4
+    __WARNING_MESSAGE = 'PAGE NON GENEREE :\nErreur d\'index - La position du vocabulaire core n\'existe pas dans la grille.\nChangez la taille de la grille, ou la position du vocabulaire core.'
     
     def __init__(self):
         self.tableau = []
@@ -14,9 +14,9 @@ class Page():
         
         # Initialisation d'une grille à la taille des valeurs indiquées dans les attributs ROW_SIZE et COL_SIZE
         # Sortie : Tableau vide en ROW_SIZE*COL_SIZE
-        for i in range(0, self.ROW_SIZE):
+        for i in range(0, self.__ROW_SIZE):
             entre = []
-            for j in range(0, self.COL_SIZE):
+            for j in range(0, self.__COL_SIZE):
                 entre.append([None])
             self.tableau.append(entre)
 
@@ -30,7 +30,7 @@ class Page():
             try:
                 self.tableau[row][col] = core_vocab
             except IndexError:
-                return self.WARNING_MESSAGE
+                return self.__WARNING_MESSAGE
         return self
     
     
