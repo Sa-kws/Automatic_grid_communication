@@ -35,6 +35,16 @@ class Page():
                 return self.WARNING_MESSAGE
         return self
     
+    
+    
     def addSlot(self, slot, row, col):
         self.tableau[row][col] = [slot, row, col]
         return self
+
+    
+    
+    def isOccupied(self, row, col):
+        return self.tableau[row][col][0] != None
+    
+    
+    
