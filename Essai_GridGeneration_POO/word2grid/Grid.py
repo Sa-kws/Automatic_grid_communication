@@ -1,3 +1,5 @@
+from word2grid import Page
+
 class Grid():
     # La grille doit toujours être créée via son attribut : grid = Grid().PAGES
     PAGES = []
@@ -5,11 +7,11 @@ class Grid():
     LISTE_CORE = [['je', 0, 1], ['vouloir', 0, 0], ['quoi', 1, 1], ['pourquoi', 1, 0]] # Devrait être modifié
 
     def __init__(self):
-        self.Grid = Grid
+        self.classeur = []
 
-    def setCoreVoc(*self):
+    def setCoreVoc(self):
     # Cette méthode va servir à modifier le vocabulaire core si celui-ci ne convient pas à l'utilisateur.
-        print(Grid.LISTE_CORE, '\n')
+        print(self.LISTE_CORE, '\n')
 
         if input("La liste de Vocabulaire Core convient-elle ? ['y' or 'n']") != 'y':
             import re
@@ -26,45 +28,53 @@ class Grid():
                     if re.fullmatch(regex, newvoc[core][element]):
                         newvoc[core][element] = int(newvoc[core][element])
 
-            Grid.LISTE_CORE = newvoc
-        return Grid.LISTE_CORE
+            self.LISTE_CORE = newvoc
+        return self.LISTE_CORE
         # Sortie : La liste du vocabulaire Core modifiée ou non, selon le choix de l'utilisateur / Type : list
 
 
-    def addPage(self, core, word, used_words, page, grid):
+    def addPage(self, core, word, used_words, grid):
         # Si le word est un voc core, on s'arrête là, puisqu'il sera déjà placé sur la page
+        page = Page.Page(3,4)
+        page = page.createPage()
         if core == False and word not in used_words:
             # Parcours de la page, et recherche des position vide via la méthode Page().isOccupied() (True ou False) dans la page créée
-            for row_browse in range(0, len(page)):
-                for col_browse in range(0, len(page[row_browse])):
-                    if Page.isOccupied(Page, row_browse, col_browse, page) == False and word not in used_words:
-                        page = Page.addSlot(Page, page, row_browse, col_browse, word)
+            for row_browse in range(0, len(page.tableau)):
+                for col_browse in range(0, len(page.tableau[row_browse])):
+                    if page.isOccupied(row_browse, col_browse) == False and word not in used_words:
+                        page = page.addSlotToPage(word, row_browse, col_browse)
                         used_words.append(word)
-        return grid
+                        print('addPage-used_words-\t', used_words)
+        return self
     # Sortie : Grille précédente plus la page ajoutée / Type : list
 
 
-    def finishGrid(*self, page, grid):
+    def finishGrid(self, page):
     # Cette méthode sert à ajouter une page qui n'est pas remplie entièrement à la grille, et est à utiliser en dernier
-        if page not in grid:
-            grid.append(page)
-        return grid
+        if page.tableau not in self.classeur:
+            self.classeur.append(page.tableau)
+        print('\nTYPE FINISH GRID\n', type(self))
+        return self
     # Sortie : Grille complète / Type : list
 
 
-    def addFulledPage(*self, ID, grid, page, used_words, word):
+    def addFulledPage(self, page, used_words, slot):
+        #row = Page._Page__COL_SIZE
+        #col = Page._Page__COL_SIZE
     # Cette méthode sert à ajouter une page entièrement remplie à la grille
         # On ajoute la page, puis on réinitialise la variable page (on la vide) et on la parcours une seule fois pour ajouter le mot sur lequelle la boucle tourne
-        grid.append(page)
-        page = Page(ID, 'test-')
-        for row in range(0, len(page)):
-            for col in range(0, len(page[row])):
-                if Page.isOccupied(Page, row, col, page) == False and word not in used_words:
-                    page = Page.addSlot(Page, page, row, col, word)
-                    used_words.append(word)
+        self.classeur.append(page.tableau)
+
+        p = Page.Page(3, 4)
+        p = p.createPage()
+        for row in range(0, len(page.tableau)):
+            for col in range(0, len(page.tableau[row])):
+                if p.isOccupied(row, col) == False and slot.get_word() not in used_words:
+                    p = p.addSlotToPage(slot.get_word(), row, col)
+                    used_words.append(slot.get_word())
                     break # sert à faire un seul tour de boucle
             break # sert à faire un seul tour de boucle
-        return grid
+        return self
     # Sortie Grille précédente plus la page complète ajoutée / Type : list
 
     def addFolderPage(*self, path, folder_datas, grid, ID):
@@ -75,27 +85,31 @@ class Grid():
         if path != None:
             ID += 1
             name = 'Page_' + str(ID)
-            folder_page = Page(ID, name)
+            folder_page = Page.Page(3,4)
+            folder_page = folder_page.createPage()
             for word in folder_datas:
-                grid, page = Grid.makeGrid(page=folder_page, used_words=used_words, grid=grid, ID=ID, word=word, iscore=False)
+                grid = grid.makeGrid(page=folder_page, grid=grid, used_words=used_words, ID=ID, word=word, iscore=False)
             # On réutilise la méthode Grid().finishGrid() dans le cas où la nouvelle page contient moins de mots que de positions disponibles
-            grid = Grid.finishGrid(page=folder_page, grid=grid)
-        return grid
+            self = grid.finishGrid(page=folder_page)
+        return self
     # Sortie : Grille précédente plus la 'page cible' ajoutée / Type : list
 
 
-    def makeGrid(*self, page, used_words, grid, ID, iscore, word):
+    def makeGrid(self, page, used_words, grid, ID, iscore, word):
         # Méthode servant à remplir la page, puis à l'ajouter à la grille.
             # Vérification qu'il reste de la place sur la page, puis ajout des mots
-            if Page.isFull(Page, page) == False:
-                grid = Grid.addPage(Grid, iscore, word, used_words, page, grid)
+            if page.isFull() == False:
+                print('PAGE NOT FULL ------------------')
+                page = self.addPage(core=iscore, word=word, used_words=used_words, grid=grid)
             # Quand la page est pleine, on utilise la méthode Grid().addFulledPage()
             else:
-                grid = Grid.addFulledPage(ID=ID, grid= grid, page=page, used_words=used_words, word=word)
+                print('\n---------------------PAGE IS FULL\n')
+                self = self.addFulledPage(ID=ID, grid= grid, page=page, used_words=used_words, word=word)
                 ID += 1
                 name = 'Page_' + str(ID)
-                page = Page(ID, name)
-            return grid, page
+                page = Page.Page(3,4)
+                page = page.createPage()
+            return self
     # Sortie :
     #           - Grid : Grille précédente + la/les page(s) ajoutée(s) / Type : list
     #           - Page : Nouvelle page qui sera réutilisée dans la suite de la boucle / Type : list

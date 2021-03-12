@@ -1,38 +1,31 @@
 class Slot():
 
-    def __init__(self, word, isCore):
+    def __init__(self, word, iscore):
         # word = str que l'on souhaite traiter et placer sur la grille
         # is Core = Booléen un indiquant si le mot traité fait parti du vocabulaire core ou non
         self.word = word
-        self.isCore = isCore
+        self.iscore = iscore
 
-    def addItem(self, is_core):
-        slot = []
-        slot.append(self)
-        slot.append(is_core)
-        return slot
-
-    @property
-    def openFolder(self, path_to_folder):
-        if path_to_folder != None:
-            return path_to_folder
-        else:
-            return None
+    def get_word(self):
+        return self.word
 
 class Page():
-    ROW_SIZE = int(input('Combien de lignes souhaitez-vous pour chaque page ?'))
-    COL_SIZE = int(input('Combien de colonnes souhaitez-vous pour chaque page ?'))
+    #ROW_SIZE = int(input('Combien de lignes souhaitez-vous pour chaque page ?'))
+    ROW_SIZE = 6
+    #COL_SIZE = int(input('Combien de colonnes souhaitez-vous pour chaque page ?'))
+    COL_SIZE = 7
     WARNING_MESSAGE = 'PAGE NON GENEREE :\nErreur d\'index - La position du vocabulaire core n\'existe pas dans la grille.\nChangez la taille de la grille, ou la position du vocabulaire core.'
-    def __init__(self):
+    def __init__(self, ID, name):
         self.Page = Page
+        self.ID = ID
+        self.name = name
 
-    def __new__(cls, ID, name):
+    def createPage(self):
         tableau = []
-        cls.ID = ID
         #tableau.append([ID, name])
-        for i in range(0, cls.ROW_SIZE):
+        for i in range(0, self.ROW_SIZE):
             entre = []
-            for j in range(0, cls.COL_SIZE):
+            for j in range(0, self.COL_SIZE):
                 entre.append([None])
             tableau.append(entre)
 
@@ -42,7 +35,7 @@ class Page():
             try:
                 tableau[row][col] = core_vocab
             except IndexError:
-                return cls.WARNING_MESSAGE #'PAGE NON GENEREE :\nErreur d\'index - La position du vocabulaire core n\'existe pas dans la grille.\nChangez la taille de la grille, ou la position du vocabulaire core.'
+                return self.WARNING_MESSAGE #'PAGE NON GENEREE :\nErreur d\'index - La position du vocabulaire core n\'existe pas dans la grille.\nChangez la taille de la grille, ou la position du vocabulaire core.'
         return tableau
 
     def isOccupied(self, row, col, page):
@@ -100,7 +93,7 @@ class Grid():
                         newvoc[core][element] = int(newvoc[core][element])
 
             Grid.LISTE_CORE = newvoc
-            return Grid.LISTE_CORE
+        return Grid.LISTE_CORE
 
 
     def addPage(self, core, word, used_words, page, grid):
@@ -123,6 +116,7 @@ class Grid():
     def addFulledPage(*self, ID, grid, page, used_words, word):
         grid.append(page)
         page = Page(ID, 'test-')
+        page = page.createPage()
         for row in range(0, len(page)):
             for col in range(0, len(page[row])):
                 if Page.isOccupied(Page, row, col, page) == False and word not in used_words:
@@ -139,6 +133,7 @@ class Grid():
             ID += 1
             name = 'Page_' + str(ID)
             folder_page = Page(ID, name)
+            folder_page = folder_page.createPage()
             #folder_datas = ['a remplir' for x in range(0, Page.COL_SIZE*Page.ROW_SIZE)]
             for word in folder_datas:
                 grid, page = Grid.makeGrid(page=folder_page, used_words=used_words, grid=grid, ID=ID, word=word, iscore=False)
@@ -147,7 +142,7 @@ class Grid():
             grid = Grid.finishGrid(page=folder_page, grid=grid)
         return grid
 
-    def makeGrid(*self, page, used_words, grid, ID, iscore, word):
+    def makeGrid(*self, page, used_words, grid, ID, isCore, word):
             if Page.isFull(Page, page) == False:
                 grid = Grid.addPage(Grid, iscore, word, used_words, page, grid)
             else:
@@ -155,11 +150,13 @@ class Grid():
                 ID += 1
                 name = 'Page_' + str(ID)
                 page = Page(ID, name)
+                page = page.createPage()
+
 
             return grid, page
 
 class Preprocess:
-    
+
     def addCoreWords(self, in_datas, used_words):
         stockage_intermediaire = []
         for word in in_datas:
@@ -172,6 +169,7 @@ def main(in_datas):
     ID = 0
     name = 'Page_' + str(ID)
     page = Page(ID, name)
+    page = page.createPage()
 
     used_words = []
     grid = Grid().PAGES
@@ -180,18 +178,19 @@ def main(in_datas):
 
 
 
-    if Page.isWellSized(Page, page) == False:
+    if Page.isWellSized(Page(ID, name), page) == False:
         print(Page.WARNING_MESSAGE)
         print('Le programme va s\'arrêter.')
     else:
         for ligne in in_datas:
             word = ligne[0]
-            iscore = ligne[1]
+            isCore = ligne[1]
             path = ligne[2]
+            item = Slot(word, isCore)
             # folder_datas = open(word + '.txt', 'r', encoding='utf-8')
             folder_datas = [word]
             grid = Grid.addFolderPage(path=path, folder_datas=folder_datas, grid=grid, ID=ID)
-            grid, page = Grid.makeGrid(page=page, used_words=used_words, grid=grid, ID=ID, word=word, iscore=iscore)
+            grid, page = Grid.makeGrid(page=page, used_words=used_words, grid=grid, ID=ID, word=word, isCore=isCore)
         grid = Grid.finishGrid(page=page, grid=grid)
     return grid
 
