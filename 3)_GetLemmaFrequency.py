@@ -1,11 +1,14 @@
-import time
-begin = time.time()
-
 import spacy
 import re
+import operator
+
+nlp = spacy.load('fr_core_news_sm')
+
+name_of_infile = 'name.txt'
+name_of_outfile = 'Vocab_ESLO.txt'
 
 lemme = ''
-with open('name.txt', 'r', encoding='utf-8') as f:
+with open(name_of_infile, 'r', encoding='utf-8') as f:
     for ligne in f:
         ligne = re.sub(r'[^\w\s]', '', ligne)
         lemme += ligne.replace('\n', ' ')
@@ -21,6 +24,6 @@ doc = nlp(lemme)
 frequence = sorted(frequence.items(), key=operator.itemgetter(1))
 frequence.reverse()
 
-with open('Vocab_ESLO.txt', 'w', encoding='utf-8') as out:
+with open(name_of_outfile, 'w', encoding='utf-8') as out:
     for key, value in frequence:
         out.write(str(key) + '\t' + str(value) + '\n')
