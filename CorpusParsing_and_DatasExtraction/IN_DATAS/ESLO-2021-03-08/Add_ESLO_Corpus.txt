@@ -1,0 +1,14 @@
+Ajouter les transcriptions du corpus dans ce répertoire
+
+Si besoin de travailler avec d'autres corpus: 
+
+	1/ Au format .trs:
+		Changer le nom du répertoire
+		Changer le nom du répertoire dans les scripts : 
+			1)_SortEncoding.py (si nécessaire)
+			2)_FixTranscriptions_ISO[UTF-8].py (réunir les deux si même encodage)
+			3)_GetESLOTranscriptions_ISO[UTF-8].py (réunir les deux si même encodage)
+	
+	2/ Autre format :
+		Faire un preprocess adapté pour obtenir le format souhaité (les transcriptions brutes)
+		Reprendre au script 9 : 6)_GetLemmaOrPosFrequency.py
