@@ -1,6 +1,6 @@
 ### IN_DATAS:
-	IN_DATAS doit être créé et rempli avec le répertoire ('ESLO-2021-03-08') avant la première execution. 
-	Les répertoires ESLO_ISO et ESLO_UTF-8 peuvent être créés au préalable, mais ce n'est pas nécessaires, en revanche, ils doivent être vide avant la première execution
+- IN_DATAS doit être créé et rempli avec le répertoire ('ESLO-2021-03-08') avant la première execution. 
+- Les répertoires ESLO_ISO et ESLO_UTF-8 peuvent être créés au préalable, mais ce n'est pas nécessaires, en revanche, ils doivent être vide avant la première execution
 
 ### OUT_DATAS:
 	OUT_DATAS peut-être créé au préalable mais non nécessaire
