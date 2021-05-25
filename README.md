@@ -1,1 +1,1 @@
-# Automatic_grid_communication
+# Grid generation based on app evaluation and oral corpus
