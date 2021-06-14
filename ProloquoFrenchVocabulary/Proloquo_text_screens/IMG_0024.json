@@ -1,0 +1,551 @@
+[
+    {
+        "DESCRIPTION": "16:20 Jeu. 27 mai\n36 % O\nАccueil\nis Aide\nIl y a un\nproblème\nCorps humain\nProduits\nAvoir mal\nAvoir besoin\nde soin\nd'aide\nAller toilettes\nEtre malade\nNe pas\nMontrez-moi\nAppeler\nquelqu'un\ncomprendre\nCalmer\nAide aux\nLe faire seul\nFaire une\nEtre perdu\nquelqu'un\ndevoirs\nerreur\nNe pas\nêtre prêt\nRecommencer\nParlez-moi\ntalk\ntalk\ntalk\nPlus\n2\n國\n",
+        "VERTICES": [
+            "{x : 13, y: 10}",
+            "{x : 2178, y: 10}",
+            "{x : 2178, y: 1653}",
+            "{x : 13, y: 1653}"
+        ]
+    },
+    {
+        "DESCRIPTION": "16:20",
+        "VERTICES": [
+            "{x : 13, y: 11}",
+            "{x : 75, y: 11}",
+            "{x : 75, y: 28}",
+            "{x : 13, y: 28}"
+        ]
+    },
+    {
+        "DESCRIPTION": "Jeu.",
+        "VERTICES": [
+            "{x : 99, y: 11}",
+            "{x : 144, y: 11}",
+            "{x : 144, y: 28}",
+            "{x : 99, y: 28}"
+        ]
+    },
+    {
+        "DESCRIPTION": "27",
+        "VERTICES": [
+            "{x : 155, y: 10}",
+            "{x : 180, y: 10}",
+            "{x : 180, y: 27}",
+            "{x : 155, y: 27}"
+        ]
+    },
+    {
+        "DESCRIPTION": "mai",
+        "VERTICES": [
+            "{x : 191, y: 10}",
+            "{x : 228, y: 10}",
+            "{x : 228, y: 27}",
+            "{x : 191, y: 27}"
+        ]
+    },
+    {
+        "DESCRIPTION": "36",
+        "VERTICES": [
+            "{x : 2100, y: 11}",
+            "{x : 2126, y: 11}",
+            "{x : 2126, y: 28}",
+            "{x : 2100, y: 28}"
+        ]
+    },
+    {
+        "DESCRIPTION": "%",
+        "VERTICES": [
+            "{x : 2136, y: 10}",
+            "{x : 2154, y: 10}",
+            "{x : 2154, y: 27}",
+            "{x : 2136, y: 27}"
+        ]
+    },
+    {
+        "DESCRIPTION": "O",
+        "VERTICES": [
+            "{x : 2165, y: 12}",
+            "{x : 2178, y: 12}",
+            "{x : 2178, y: 27}",
+            "{x : 2165, y: 27}"
+        ]
+    },
+    {
+        "DESCRIPTION": "Аccueil",
+        "VERTICES": [
+            "{x : 51, y: 250}",
+            "{x : 157, y: 250}",
+            "{x : 157, y: 274}",
+            "{x : 51, y: 274}"
+        ]
+    },
+    {
+        "DESCRIPTION": "is",
+        "VERTICES": [
+            "{x : 1054, y: 244}",
+            "{x : 1093, y: 244}",
+            "{x : 1093, y: 280}",
+            "{x : 1054, y: 280}"
+        ]
+    },
+    {
+        "DESCRIPTION": "Aide",
+        "VERTICES": [
+            "{x : 1105, y: 248}",
+            "{x : 1184, y: 248}",
+            "{x : 1184, y: 276}",
+            "{x : 1105, y: 276}"
+        ]
+    },
+    {
+        "DESCRIPTION": "Il",
+        "VERTICES": [
+            "{x : 132, y: 344}",
+            "{x : 205, y: 345}",
+            "{x : 204, y: 398}",
+            "{x : 131, y: 397}"
+        ]
+    },
+    {
+        "DESCRIPTION": "y",
+        "VERTICES": [
+            "{x : 207, y: 339}",
+            "{x : 231, y: 339}",
+            "{x : 230, y: 404}",
+            "{x : 206, y: 404}"
+        ]
+    },
+    {
+        "DESCRIPTION": "a",
+        "VERTICES": [
+            "{x : 226, y: 354}",
+            "{x : 253, y: 354}",
+            "{x : 252, y: 385}",
+            "{x : 225, y: 385}"
+        ]
+    },
+    {
+        "DESCRIPTION": "un",
+        "VERTICES": [
+            "{x : 274, y: 352}",
+            "{x : 337, y: 353}",
+            "{x : 336, y: 387}",
+            "{x : 273, y: 386}"
+        ]
+    },
+    {
+        "DESCRIPTION": "problème",
+        "VERTICES": [
+            "{x : 107, y: 414}",
+            "{x : 360, y: 406}",
+            "{x : 361, y: 456}",
+            "{x : 109, y: 464}"
+        ]
+    },
+    {
+        "DESCRIPTION": "Corps",
+        "VERTICES": [
+            "{x : 482, y: 344}",
+            "{x : 642, y: 340}",
+            "{x : 643, y: 395}",
+            "{x : 483, y: 399}"
+        ]
+    },
+    {
+        "DESCRIPTION": "humain",
+        "VERTICES": [
+            "{x : 664, y: 344}",
+            "{x : 860, y: 339}",
+            "{x : 861, y: 385}",
+            "{x : 665, y: 390}"
+        ]
+    },
+    {
+        "DESCRIPTION": "Produits",
+        "VERTICES": [
+            "{x : 999, y: 344}",
+            "{x : 1224, y: 344}",
+            "{x : 1224, y: 386}",
+            "{x : 999, y: 386}"
+        ]
+    },
+    {
+        "DESCRIPTION": "Avoir",
+        "VERTICES": [
+            "{x : 1423, y: 344}",
+            "{x : 1564, y: 345}",
+            "{x : 1564, y: 387}",
+            "{x : 1423, y: 386}"
+        ]
+    },
+    {
+        "DESCRIPTION": "mal",
+        "VERTICES": [
+            "{x : 1584, y: 344}",
+            "{x : 1675, y: 344}",
+            "{x : 1675, y: 386}",
+            "{x : 1584, y: 386}"
+        ]
+    },
+    {
+        "DESCRIPTION": "Avoir",
+        "VERTICES": [
+            "{x : 1818, y: 343}",
+            "{x : 1959, y: 344}",
+            "{x : 1959, y: 386}",
+            "{x : 1818, y: 385}"
+        ]
+    },
+    {
+        "DESCRIPTION": "besoin",
+        "VERTICES": [
+            "{x : 1979, y: 343}",
+            "{x : 2157, y: 344}",
+            "{x : 2157, y: 387}",
+            "{x : 1979, y: 386}"
+        ]
+    },
+    {
+        "DESCRIPTION": "de",
+        "VERTICES": [
+            "{x : 1012, y: 411}",
+            "{x : 1074, y: 411}",
+            "{x : 1074, y: 452}",
+            "{x : 1012, y: 452}"
+        ]
+    },
+    {
+        "DESCRIPTION": "soin",
+        "VERTICES": [
+            "{x : 1095, y: 410}",
+            "{x : 1206, y: 410}",
+            "{x : 1206, y: 452}",
+            "{x : 1095, y: 452}"
+        ]
+    },
+    {
+        "DESCRIPTION": "d'aide",
+        "VERTICES": [
+            "{x : 1909, y: 410}",
+            "{x : 2067, y: 411}",
+            "{x : 2067, y: 453}",
+            "{x : 1909, y: 452}"
+        ]
+    },
+    {
+        "DESCRIPTION": "Aller",
+        "VERTICES": [
+            "{x : 55, y: 598}",
+            "{x : 178, y: 598}",
+            "{x : 178, y: 640}",
+            "{x : 55, y: 640}"
+        ]
+    },
+    {
+        "DESCRIPTION": "toilettes",
+        "VERTICES": [
+            "{x : 196, y: 598}",
+            "{x : 413, y: 598}",
+            "{x : 413, y: 640}",
+            "{x : 196, y: 640}"
+        ]
+    },
+    {
+        "DESCRIPTION": "Etre",
+        "VERTICES": [
+            "{x : 515, y: 599}",
+            "{x : 619, y: 599}",
+            "{x : 619, y: 640}",
+            "{x : 515, y: 640}"
+        ]
+    },
+    {
+        "DESCRIPTION": "malade",
+        "VERTICES": [
+            "{x : 641, y: 599}",
+            "{x : 832, y: 599}",
+            "{x : 832, y: 640}",
+            "{x : 641, y: 640}"
+        ]
+    },
+    {
+        "DESCRIPTION": "Ne",
+        "VERTICES": [
+            "{x : 1461, y: 596}",
+            "{x : 1530, y: 602}",
+            "{x : 1526, y: 645}",
+            "{x : 1457, y: 639}"
+        ]
+    },
+    {
+        "DESCRIPTION": "pas",
+        "VERTICES": [
+            "{x : 1550, y: 602}",
+            "{x : 1644, y: 611}",
+            "{x : 1639, y: 659}",
+            "{x : 1545, y: 650}"
+        ]
+    },
+    {
+        "DESCRIPTION": "Montrez-moi",
+        "VERTICES": [
+            "{x : 1822, y: 598}",
+            "{x : 2153, y: 598}",
+            "{x : 2153, y: 639}",
+            "{x : 1822, y: 639}"
+        ]
+    },
+    {
+        "DESCRIPTION": "Appeler",
+        "VERTICES": [
+            "{x : 1006, y: 599}",
+            "{x : 1215, y: 599}",
+            "{x : 1215, y: 651}",
+            "{x : 1006, y: 651}"
+        ]
+    },
+    {
+        "DESCRIPTION": "quelqu'un",
+        "VERTICES": [
+            "{x : 976, y: 664}",
+            "{x : 1241, y: 665}",
+            "{x : 1241, y: 726}",
+            "{x : 976, y: 725}"
+        ]
+    },
+    {
+        "DESCRIPTION": "comprendre",
+        "VERTICES": [
+            "{x : 1386, y: 665}",
+            "{x : 1713, y: 663}",
+            "{x : 1713, y: 717}",
+            "{x : 1386, y: 719}"
+        ]
+    },
+    {
+        "DESCRIPTION": "Calmer",
+        "VERTICES": [
+            "{x : 140, y: 854}",
+            "{x : 329, y: 854}",
+            "{x : 329, y: 896}",
+            "{x : 140, y: 896}"
+        ]
+    },
+    {
+        "DESCRIPTION": "Aide",
+        "VERTICES": [
+            "{x : 556, y: 852}",
+            "{x : 675, y: 856}",
+            "{x : 673, y: 899}",
+            "{x : 554, y: 895}"
+        ]
+    },
+    {
+        "DESCRIPTION": "aux",
+        "VERTICES": [
+            "{x : 696, y: 862}",
+            "{x : 791, y: 866}",
+            "{x : 790, y: 900}",
+            "{x : 695, y: 896}"
+        ]
+    },
+    {
+        "DESCRIPTION": "Le",
+        "VERTICES": [
+            "{x : 947, y: 855}",
+            "{x : 1007, y: 855}",
+            "{x : 1007, y: 896}",
+            "{x : 947, y: 896}"
+        ]
+    },
+    {
+        "DESCRIPTION": "faire",
+        "VERTICES": [
+            "{x : 1027, y: 854}",
+            "{x : 1144, y: 854}",
+            "{x : 1144, y: 896}",
+            "{x : 1027, y: 896}"
+        ]
+    },
+    {
+        "DESCRIPTION": "seul",
+        "VERTICES": [
+            "{x : 1165, y: 855}",
+            "{x : 1273, y: 855}",
+            "{x : 1273, y: 896}",
+            "{x : 1165, y: 896}"
+        ]
+    },
+    {
+        "DESCRIPTION": "Faire",
+        "VERTICES": [
+            "{x : 1427, y: 852}",
+            "{x : 1558, y: 856}",
+            "{x : 1556, y: 899}",
+            "{x : 1426, y: 895}"
+        ]
+    },
+    {
+        "DESCRIPTION": "une",
+        "VERTICES": [
+            "{x : 1580, y: 862}",
+            "{x : 1676, y: 865}",
+            "{x : 1675, y: 898}",
+            "{x : 1579, y: 895}"
+        ]
+    },
+    {
+        "DESCRIPTION": "Etre",
+        "VERTICES": [
+            "{x : 1850, y: 854}",
+            "{x : 1955, y: 856}",
+            "{x : 1954, y: 897}",
+            "{x : 1849, y: 895}"
+        ]
+    },
+    {
+        "DESCRIPTION": "perdu",
+        "VERTICES": [
+            "{x : 1977, y: 852}",
+            "{x : 2128, y: 855}",
+            "{x : 2127, y: 910}",
+            "{x : 1976, y: 907}"
+        ]
+    },
+    {
+        "DESCRIPTION": "quelqu'un",
+        "VERTICES": [
+            "{x : 100, y: 920}",
+            "{x : 365, y: 920}",
+            "{x : 365, y: 983}",
+            "{x : 100, y: 983}"
+        ]
+    },
+    {
+        "DESCRIPTION": "devoirs",
+        "VERTICES": [
+            "{x : 573, y: 920}",
+            "{x : 772, y: 920}",
+            "{x : 772, y: 962}",
+            "{x : 573, y: 962}"
+        ]
+    },
+    {
+        "DESCRIPTION": "erreur",
+        "VERTICES": [
+            "{x : 1470, y: 929}",
+            "{x : 1631, y: 928}",
+            "{x : 1631, y: 962}",
+            "{x : 1470, y: 963}"
+        ]
+    },
+    {
+        "DESCRIPTION": "Ne",
+        "VERTICES": [
+            "{x : 145, y: 1105}",
+            "{x : 215, y: 1112}",
+            "{x : 210, y: 1156}",
+            "{x : 141, y: 1149}"
+        ]
+    },
+    {
+        "DESCRIPTION": "pas",
+        "VERTICES": [
+            "{x : 234, y: 1110}",
+            "{x : 328, y: 1120}",
+            "{x : 322, y: 1170}",
+            "{x : 229, y: 1161}"
+        ]
+    },
+    {
+        "DESCRIPTION": "être",
+        "VERTICES": [
+            "{x : 122, y: 1172}",
+            "{x : 222, y: 1176}",
+            "{x : 220, y: 1219}",
+            "{x : 120, y: 1215}"
+        ]
+    },
+    {
+        "DESCRIPTION": "prêt",
+        "VERTICES": [
+            "{x : 244, y: 1169}",
+            "{x : 349, y: 1173}",
+            "{x : 347, y: 1232}",
+            "{x : 242, y: 1228}"
+        ]
+    },
+    {
+        "DESCRIPTION": "Recommencer",
+        "VERTICES": [
+            "{x : 480, y: 1108}",
+            "{x : 869, y: 1114}",
+            "{x : 868, y: 1155}",
+            "{x : 479, y: 1149}"
+        ]
+    },
+    {
+        "DESCRIPTION": "Parlez-moi",
+        "VERTICES": [
+            "{x : 971, y: 1108}",
+            "{x : 1251, y: 1108}",
+            "{x : 1251, y: 1150}",
+            "{x : 971, y: 1150}"
+        ]
+    },
+    {
+        "DESCRIPTION": "talk",
+        "VERTICES": [
+            "{x : 1109, y: 1178}",
+            "{x : 1127, y: 1179}",
+            "{x : 1126, y: 1190}",
+            "{x : 1108, y: 1189}"
+        ]
+    },
+    {
+        "DESCRIPTION": "talk",
+        "VERTICES": [
+            "{x : 1099, y: 1188}",
+            "{x : 1116, y: 1189}",
+            "{x : 1115, y: 1200}",
+            "{x : 1098, y: 1199}"
+        ]
+    },
+    {
+        "DESCRIPTION": "talk",
+        "VERTICES": [
+            "{x : 1105, y: 1197}",
+            "{x : 1125, y: 1198}",
+            "{x : 1125, y: 1209}",
+            "{x : 1105, y: 1208}"
+        ]
+    },
+    {
+        "DESCRIPTION": "Plus",
+        "VERTICES": [
+            "{x : 1933, y: 1362}",
+            "{x : 2046, y: 1363}",
+            "{x : 2046, y: 1405}",
+            "{x : 1933, y: 1404}"
+        ]
+    },
+    {
+        "DESCRIPTION": "2",
+        "VERTICES": [
+            "{x : 1968, y: 1474}",
+            "{x : 1993, y: 1474}",
+            "{x : 1993, y: 1509}",
+            "{x : 1968, y: 1509}"
+        ]
+    },
+    {
+        "DESCRIPTION": "國",
+        "VERTICES": [
+            "{x : 705, y: 1595}",
+            "{x : 705, y: 1653}",
+            "{x : 626, y: 1652}",
+            "{x : 626, y: 1594}"
+        ]
+    }
+]
