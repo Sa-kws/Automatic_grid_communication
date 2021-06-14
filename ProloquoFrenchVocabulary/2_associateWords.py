@@ -56,14 +56,7 @@ for file in os.listdir(FOLDER):
 
             # Recherche de proximité entre deux mots (cf readme)
             try:
-                print(annotation['DESCRIPTION'])
-                print('word_two_A_x :', A[0])
-                print('word_two_A_y :', A[1])
-                print('word_one_B_x :', word_one_B_point_x)
-                print('word_one_B_y :', word_one_B_point_y)
-                print('\n')
                 # Distance abscisse (x) entre le mot1 (word_one_B) et le mot2 inférieur à 20 + Distance ordonnés (y) compris entre -10 et 10
-                # Les conditions 2 et 3 fonctionnent, mais uniquement pour trouver les mots qui devraient ê ensemble, il faut une autre condition pour les espaces interlinéaires
                 if A[0] - word_one_B_point_x <25 and A[1] - word_one_B_point_y < 3 and A[1] - word_one_B_point_y > -3:
                     word = word_one_B + ' ' + annotation['DESCRIPTION']
                     try:
