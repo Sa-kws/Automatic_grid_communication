@@ -6,6 +6,8 @@ tour = 0
 indesirables = [x.replace('\n', '') for x in open('mots_indésirables_picto.txt', 'r', encoding='utf-8')]
 folders_name = [x.replace('\n', '').replace('-', ' ').replace(' Adjectifs','').replace(' Verbes','').upper() for x in open('french_repositories.txt', 'r', encoding='utf-8')]
 folders_name = sorted(folders_name)
+
+# Ecrasement du fichier de sortie
 erase = open('coordonnates_folder_names.txt', 'w', encoding='utf-8')
 erase.close()
 
@@ -50,21 +52,29 @@ for file in os.listdir(FOLDER):
         C, word_position = formCoordonate(annotation['VERTICES'][2], word_position)
         D, word_position = formCoordonate(annotation['VERTICES'][3], word_position)
         if mot not in indesirables:
+
+            # Suppression des métadonnées de l'ipad
             if A[1] >200 and A[1] <1420 and '↑' not in mot:
+
                 # A[1] == ordonné du point A du mot
                 # D[1] == ordonné du point D du mot
                 if A[1] < 290 and D[1] >240:
+
+                    # Sélection du titre à partir d'une certaine ordonnée (935) du point A afin d'éliminer le bouton retour
                     if A[0] > 935:
-                        #print(tour, mot)
                         nom += mot + ' '
-                    # if le mot retour est entre les abscisse tant ou tant on pass, on garda la condition ligne 56 qui positionne la bonne ordonnée
-                if C[1] > 400:
+
+                # On récupère le corps du vocabulaire, en éliminant le titre et le bouton retour (avec une ordonné suppérieur à 350 pour le point C du mot)
+                if C[1] > 350:
                     if mot not in nom and mot:
                         all_file += mot + '\t'
         past_word = mot
     nom = nom.rstrip()
     all_file = all_file.rstrip()
-    print(all_file)
+    #print(nom)
+    #print(all_file)
+    #print('\n---------------------------------\n')
 
+    # Pour le développement (afin d'éviter de parcourir tout le répertoire)
     if tour == 15:
         break
