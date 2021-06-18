@@ -14,7 +14,6 @@ folders_name = [x.replace('\n', '').replace('-', ' ').replace(' Adjectifs','').r
 folders_name = sorted(folders_name)
 composed_words = [x.replace('\n','') for x in open('mots_composés.txt', 'r', encoding='utf-8')]
 truncated_words = [x.replace('\n','') for x in open('mots_tronqués.txt', 'r', encoding='utf-8')]
-
 # Ecrasement du fichier de sortie
 erase = open('coordonnates_folder_names.txt', 'w', encoding='utf-8')
 erase.close() # Faire un truc avec os.remove
@@ -89,8 +88,8 @@ for file in os.listdir(FOLDER):
 
 
     # Pour le développement (afin d'éviter de parcourir tout le répertoire)
-    if tour == 15:
-        break
+    #if tour == 15:
+    #    break
 
 all_names = [x.replace(' - 2', '') for x in all_names]
 all_names = list(OrderedDict.fromkeys(all_names))
@@ -120,7 +119,10 @@ for liste in grid:
     vocabulary = liste[1].split(' ')
     for word in vocabulary:
         with open('Proloquo_FR_brut.csv', 'a', encoding='utf-8') as outfile:
-            outfile.write(word.upper() + '\t' + page.lower() + '\t' + word.lower() + '@' + page.lower() + '\n')
+            if word.upper() in folders_name:
+                outfile.write(word.upper() + '_R\t' + page.lower() + '\t' + word.lower() + '_R@' + page.lower() + '\n')
+            else:
+                outfile.write(word.upper() + '\t' + page.lower() + '\t' + word.lower() + '@' + page.lower() + '\n')
 
 
 
