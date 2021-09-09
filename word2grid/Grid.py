@@ -10,13 +10,7 @@ class Grid():
         self.classeur = []
 
 
-# Il faut appeler les méthodes de Page
 
-# La grille va :
-#       1) Remplir la Page()
-#       2) Ajouter la page au classeur
-
-'''
     def fillPageWithCore(self, page):
         for core_vocab in page.core_vocab:
             row = core_vocab[3]
@@ -26,7 +20,7 @@ class Grid():
             except IndexError:
                 page.tableau.append(page.__WARNING_MESSAGE)
         return page
-'''
+
 
     def fillPage(self, slot, page, used_words):
         for row in range(0, len(page.tableau)):
@@ -36,7 +30,7 @@ class Grid():
                     last_position = pos = [row, liste.index(slot.get_word())]
                     used_words.append(slot.get_word())
 
-        return ???
+        return page
 
     def fillClasseur(self, page):
         self.PAGES.append(page)
